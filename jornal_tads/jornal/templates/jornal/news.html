@@ -1,0 +1,35 @@
+{% extends 'jornal/base.html' %}
+{% block title %}
+<title>Notícia</title>
+{% endblock title %}
+{% block content %}
+<main>
+    <section id="news">
+        <h2>{{ news.titulo }}</h2>
+        <h3>Por {{ news.autor.first_name }} {{ news.autor.last_name }} ({{ news.autor.username }})</h3>
+        <p>{{ news.conteudo }}</p>
+    </section>
+    <hr>
+    <section id="comments">
+        <h2>Comentários</h2>
+    {% if user.is_authenticated %}
+        <button id="create_comment">Faça um comentário</button>
+        <form action="{% url 'jornal:create-comment' edition_id news.id %}" method="POST" id="create_comment_form" style="display:none;">
+            {% csrf_token %}
+            <textarea id="conteudo" name="conteudo" rows="5" cols="40" required></textarea>
+            <span id="conteudo_error" style="display:none;"></span>
+            <br>
+            <input type="submit" value="Enviar">
+        </form>
+    {% endif %}
+        <div id="comments_section">
+            <div id="async_comments"></div>
+        {% for comment in comments %}
+            <strong>{{ comment.autor.username }}</strong>
+            <p>{{ comment.conteudo }}</p>
+        {% endfor %}
+        </div>
+    </section>
+</main>
+<script src="{% static 'jornal/js/comment.js' %}"></script>
+{% endblock content %}

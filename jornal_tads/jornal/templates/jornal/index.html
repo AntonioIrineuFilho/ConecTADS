@@ -1,0 +1,29 @@
+{% extends 'jornal/base.html' %}
+{% block title %}
+<title>Página Inicial</title>
+{% endblock title %}
+{% block content %}
+<main>
+    <h2>Edições</h2>
+    {% if user.is_authenticated %}
+        <button id="create_edition">*Icone* Criar Edição</button>
+        <form action="{% url 'jornal:create-edition' %}" method="POST" style="display: none;" id="create_edition_form">
+            {% csrf_token %}
+            <label for="data">Data da Edição: </label>
+            <input type="date" name="data" id="data" max="" required>
+            <br>
+            <input type="submit" value="Enviar">
+        </form> 
+    {% endif %}
+    {% if not editions %}
+        <strong>Nenhuma edição dispoível</strong>
+    {% else %}
+        <ol>
+        {% for ed in editions %}
+            <li><a href="{% url 'jornal:view-edition' ed.id %}">Edição {{ed.data}}</a></li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+</main>
+<script src="{% static 'jornal/js/edition.js' %}"></script>
+{% endblock content %}

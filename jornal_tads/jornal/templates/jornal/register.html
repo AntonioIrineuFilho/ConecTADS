@@ -1,0 +1,30 @@
+{% extends 'jornal/base.html' %}
+{% block title %}
+<title>Cadastro</title>
+{% endblock title %}
+{% block content %}
+<main>
+    <form action="{% url 'jornal:register' %}" method="POST" id="register_form">
+        {% csrf_token %}
+        <label for="first_name">Primeiro Nome: </label>
+        <input type="text" name="first_name" id="first_name" pattern="^([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)(\s[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)*$" title="O nome deve iniciar com uma letra maiúscula e deve ter apenas letras e espaços" required>
+        <br>
+        <label for="last_name">Sobrenome: </label>
+        <input type="text" name="last_name" id="last_name" pattern="^([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)(\s[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)*$" title="O nome deve iniciar com uma letra maiúscula e deve ter apenas letras e espaços" required>
+        <br>
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" pattern="^\S+$" title="O username não deve possuir espaços em branco" required>
+        <span style="display:none;" id="username_error"></span>
+        <br>
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="O formato do email não é válido" required>   
+        <span style="display:none;" id="email_error"></span>
+        <br>
+        <label for="password">Senha: </label>
+        <input type="password" name="password" id="password" pattern="^\S{8,}$" title="A senha deve ter no mínimo 8 caracteres e não deve possuir espaços" required>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+</main>
+<script src="{% static 'jornal/js/register.js' %}"></script>
+{% endblock content %}

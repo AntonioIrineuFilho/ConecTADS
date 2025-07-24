@@ -1,0 +1,37 @@
+{% extends 'jornal/base.html' %}
+{% block title %}
+<title>Edição</title>
+{% endblock %}
+{% block content %}
+<main>
+    <h2>Edição {{ edition.data }}</h2>
+    <h3>Notícias</h3>
+    {% if user.is_authenticated %}
+        <button id="create_news">*Icone* Criar Notícia</button>
+        <br>
+        <form action="{% url 'jornal:create-news' edition.id %}" method="POST" id="create_news_form" style="display:none;">
+            {% csrf_token %}
+            <label for="titulo">Título: </label>
+            <input type="text" name="titulo" id="titulo" maxlength="255" required>
+            <span id="titulo_error" style="display:none;"></span>
+            <br>
+            <label for="conteudo">Conteúdo: </label>
+            <textarea rows="5" cols="40" name="conteudo" id="conteudo" required>
+            </textarea>
+            <span id="conteudo_error" style="display:none;"></span>
+            <br>
+            <input type="submit" value="Enviar">
+        </form>
+    {% endif %}
+    {% if not news %}
+        <strong>Nenhuma notícia disponível</strong>
+    {% else %}
+        <ul>
+        {% for n in news %}
+            <li><a href="{% url 'jornal:view-news' edition.id n.id %}">{{ n.titulo }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</main>
+<script src="{% static 'jornal/js/news.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'jornal/base.html' %}
+{% block title %}
+<title>Login</title>
+{% endblock title %}
+{% block content %}
+<main>
+    <form action="{% url 'jornal:login' %}" method="POST" id="login_form">
+        {% csrf_token %}
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="name" required>
+        <br>
+        <label for="password">Senha: </label>
+        <input type="password" name="password" id="password" required>
+        <br>
+        <span style="display:none;" id="login_error"></span>
+        <input type="submit" value="Enviar">
+    </form>
+</main>
+<script src="{% static 'jornal/js/login.js' %}"></script>
+{% endblock content %}  

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+{% block title %}
+<title>Base</title>
+{% endblock title %}
+</head>
+<body>
+{% block header %}
+<header>
+    <h1><a href="{% url 'jornal:index' %}">ConecTADS</a></h1>
+{% if user.is_authenticated %}
+    <nav>
+        <ul>
+            <li>Bem-vindo, {{user.username}}!</li>
+            <li><a href="{% url 'jornal:logout' %}">*Icone de Logout*</a></li>
+        </ul>
+    </nav>
+{% else %}
+    <nav>
+        <ul>
+            <li><a href="{% url 'jornal:register' %}">Cadastrar-se</a></li>
+            <li><a href="{% url 'jornal:login' %}">Entrar</a></li>
+        </ul>
+    </nav>
+{% endif %}
+</header>
+{% endblock header %}
+{% block content %}
+<main></main>
+{% endblock content %}
+{% block footer %}
+<footer>
+    <p>&copy; ConecTADS</p>
+    <ul>
+        <li>X</li>
+        <li>Instagram</li>
+        <li>Facebook</li>
+    </ul>
+</footer>
+{% endblock footer %}
+</body>
+</html>
