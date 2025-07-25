@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: whitesmoke;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main.section {
+    flex-grow: 1; /* Permite que o main ocupe todo o espaço disponível */
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: 100%;
+    max-width: 960px; /* Mantém o conteúdo centralizado e com largura máxima */
+    margin: auto; /* Centraliza o conteúdo horizontalmente */
+    background-color: whitesmoke;
+}     
+
+.box.has-background-dark .input {
+    background-color: white !important; /* Força o fundo branco */
+    color: #363636 !important; /* Força a cor do texto para um cinza escuro (quase preto) */
+    border-color: #dbdbdb !important; /* Garante que a borda seja visível (cinza claro) */
+}
+
+.navbar-logo-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}

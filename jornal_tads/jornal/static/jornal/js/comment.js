@@ -43,11 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data.success) {
                     const commentSection = document.getElementById("async_comments");
                     const newComment = `
-                    <div>
-                        <strong>${data.comment.username}</strong>
-                        <p>${data.comment.conteudo}</p>
+                    <div class="box is-dark mb-4">
+                        <p class="title is-5 has-text-white">${data.comment.username}</p>
+                        <p class="content has-text-white-ter">${data.comment.conteudo}</p>
                     </div>
-                    `
+                    `;
                     commentSection.insertAdjacentHTML("afterbegin", newComment);
                 }
             })

@@ -5,43 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'jornal/css/main.css' %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 {% block title %}
-<title>Base</title>
+    <title>Base</title>
 {% endblock title %}
 </head>
 <body>
 {% block header %}
-<header>
-    <h1><a href="{% url 'jornal:index' %}">ConecTADS</a></h1>
-{% if user.is_authenticated %}
-    <nav>
-        <ul>
-            <li>Bem-vindo, {{user.username}}!</li>
-            <li><a href="{% url 'jornal:logout' %}">*Icone de Logout*</a></li>
-        </ul>
-    </nav>
-{% else %}
-    <nav>
-        <ul>
-            <li><a href="{% url 'jornal:register' %}">Cadastrar-se</a></li>
-            <li><a href="{% url 'jornal:login' %}">Entrar</a></li>
-        </ul>
-    </nav>
-{% endif %}
-</header>
+    <header>
+        <nav class="navbar is-info has-background-dark" role="navigation" aria-label="main navigation">
+            <div class="navbar-item navbar-logo-center pt-4">
+                <a href="{% url 'jornal:index' %}">
+                    <h1 class="title is-4 has-text-white">ConecTADS</h1>
+                </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    {% if user.is_authenticated %}
+                    <div class="navbar-item is-flex is-align-items-center">
+                        <span class="mr-3 has-text-white">Bem-vindo, <strong>{{ user.username }}</strong>!</span>
+                        <a href="{% url 'jornal:logout' %}" class="button is-danger is-outlined">
+                            <span class="icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                            <span>Sair</span>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a href="{% url 'jornal:register' %}" class="button is-link">
+                                <strong>Cadastrar-se</strong>
+                            </a>
+                            <a href="{% url 'jornal:login' %}" class="button is-link">
+                                <strong>Entrar</strong>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
 {% endblock header %}
 {% block content %}
-<main></main>
+    <main></main>
 {% endblock content %}
 {% block footer %}
-<footer>
-    <p>&copy; ConecTADS</p>
-    <ul>
-        <li>X</li>
-        <li>Instagram</li>
-        <li>Facebook</li>
-    </ul>
-</footer>
+    <footer class="footer has-background-dark has-text-white-ter">
+        <div class="content has-text-centered mt-6">
+            <p>
+                &copy; 2024 <strong>ConecTADS</strong>. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
 {% endblock footer %}
 </body>
 </html>

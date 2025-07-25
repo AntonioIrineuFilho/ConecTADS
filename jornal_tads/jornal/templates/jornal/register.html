@@ -1,30 +1,69 @@
 {% extends 'jornal/base.html' %}
+{% load static %}
 {% block title %}
 <title>Cadastro</title>
 {% endblock title %}
 {% block content %}
-<main>
-    <form action="{% url 'jornal:register' %}" method="POST" id="register_form">
-        {% csrf_token %}
-        <label for="first_name">Primeiro Nome: </label>
-        <input type="text" name="first_name" id="first_name" pattern="^([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)(\s[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)*$" title="O nome deve iniciar com uma letra maiúscula e deve ter apenas letras e espaços" required>
-        <br>
-        <label for="last_name">Sobrenome: </label>
-        <input type="text" name="last_name" id="last_name" pattern="^([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)(\s[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)*$" title="O nome deve iniciar com uma letra maiúscula e deve ter apenas letras e espaços" required>
-        <br>
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" pattern="^\S+$" title="O username não deve possuir espaços em branco" required>
-        <span style="display:none;" id="username_error"></span>
-        <br>
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="O formato do email não é válido" required>   
-        <span style="display:none;" id="email_error"></span>
-        <br>
-        <label for="password">Senha: </label>
-        <input type="password" name="password" id="password" pattern="^\S{8,}$" title="A senha deve ter no mínimo 8 caracteres e não deve possuir espaços" required>
-        <br>
-        <input type="submit" value="Enviar">
-    </form>
+<main class="section">
+    <div class="container is-max-desktop">
+        <div class="box has-background-dark">
+            <h1 class="title is-3 has-text-centered mb-5 has-text-white">Criar Conta</h1>
+            <form action="{% url 'jornal:register' %}" method="POST" id="register_form">
+                {% csrf_token %}
+
+                <div class="field">
+                    <label class="label has-text-white" for="first_name">Primeiro Nome</label>
+                    <div class="control">
+                        <input class="input is-white" type="text" name="first_name" id="first_name"
+                               pattern="^([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)(\s[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)*$"
+                               title="O nome deve iniciar com uma letra maiúscula e deve ter apenas letras e espaços" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label has-text-white" for="last_name">Sobrenome</label>
+                    <div class="control">
+                        <input class="input is-white" type="text" name="last_name" id="last_name"
+                               pattern="^([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)(\s[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]*)*$"
+                               title="O nome deve iniciar com uma letra maiúscula e deve ter apenas letras e espaços" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label has-text-white" for="username">Username</label>
+                    <div class="control">
+                        <input class="input is-white" type="text" name="username" id="username"
+                               pattern="^\S+$" title="O username não deve possuir espaços em branco" required>
+                    </div>
+                    <p class="help is-danger" style="display:none;" id="username_error"></p>
+                </div>
+
+                <div class="field">
+                    <label class="label has-text-white" for="email">Email</label>
+                    <div class="control">
+                        <input class="input is-white" type="email" name="email" id="email"
+                               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                               title="O formato do email não é válido" required>
+                    </div>
+                    <p class="help is-danger" style="display:none;" id="email_error"></p>
+                </div>
+
+                <div class="field">
+                    <label class="label has-text-white" for="password">Senha</label>
+                    <div class="control">
+                        <input class="input is-white" type="password" name="password" id="password"
+                               pattern="^\S{8,}$" title="A senha deve ter no mínimo 8 caracteres e não deve possuir espaços" required>
+                    </div>
+                </div>
+
+                <div class="field is-grouped is-grouped-centered mt-5">
+                    <div class="control">
+                        <input type="submit" value="Finalizar" class="button is-link">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 <script src="{% static 'jornal/js/register.js' %}"></script>
 {% endblock content %}

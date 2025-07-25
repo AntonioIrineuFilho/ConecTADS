@@ -1,37 +1,67 @@
 {% extends 'jornal/base.html' %}
+{% load static %}
 {% block title %}
 <title>Edição</title>
 {% endblock %}
 {% block content %}
-<main>
-    <h2>Edição {{ edition.data }}</h2>
-    <h3>Notícias</h3>
-    {% if user.is_authenticated %}
-        <button id="create_news">*Icone* Criar Notícia</button>
-        <br>
-        <form action="{% url 'jornal:create-news' edition.id %}" method="POST" id="create_news_form" style="display:none;">
-            {% csrf_token %}
-            <label for="titulo">Título: </label>
-            <input type="text" name="titulo" id="titulo" maxlength="255" required>
-            <span id="titulo_error" style="display:none;"></span>
-            <br>
-            <label for="conteudo">Conteúdo: </label>
-            <textarea rows="5" cols="40" name="conteudo" id="conteudo" required>
-            </textarea>
-            <span id="conteudo_error" style="display:none;"></span>
-            <br>
-            <input type="submit" value="Enviar">
-        </form>
-    {% endif %}
-    {% if not news %}
-        <strong>Nenhuma notícia disponível</strong>
-    {% else %}
-        <ul>
-        {% for n in news %}
-            <li><a href="{% url 'jornal:view-news' edition.id n.id %}">{{ n.titulo }}</a></li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+<main class="section">
+    <div class="container">
+        <h2 class="title is-2 mb-4 has-text-black">Edição {{ edition.data|date:"d/m/Y" }}</h2>
+        <h3 class="title is-3 mb-4 has-text-black">Notícias</h3>
+        {% if user.is_authenticated %}
+            <div class="field is-grouped">
+                <p class="control">
+                    <button id="create_news" class="button is-link">
+                        <span class="icon">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span>Criar Notícia</span>
+                    </button>
+                </p>
+            </div>
+
+            <div class="box mt-4 has-background-dark" style="display:none;" id="create_news_form">
+                <h3 class="title is-5 has-text-white">Criar Nova Notícia</h3>
+                <form action="{% url 'jornal:create-news' edition.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label class="label has-text-white" for="titulo">Título</label>
+                        <div class="control">
+                            <input class="input" type="text" name="titulo" id="titulo" maxlength="255" required>
+                        </div>
+                        <p class="help is-danger" style="display:none;" id="titulo_error"></p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label has-text-white" for="conteudo">Conteúdo</label>
+                        <div class="control">
+                            <textarea class="textarea has-background-white has-text-black" name="conteudo" id="conteudo" rows="5" required></textarea>
+                        </div>
+                        <p class="help is-danger" style="display:none;" id="conteudo_error"></p>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <input type="submit" value="Finalizar" class="button is-link">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+        {% if not news %}
+            <div class="notification is-info is-light mt-4">
+                <p>Nenhuma notícia disponível</p>
+            </div>
+        {% else %}
+            <div class="box mt-4 has-background-dark">
+                <ul class="content">
+                {% for n in news %}
+                    <li><a class="has-text-info" href="{% url 'jornal:view-news' edition.id n.id %}">{{ n.titulo }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
 </main>
 <script src="{% static 'jornal/js/news.js' %}"></script>
 {% endblock %}

@@ -1,20 +1,36 @@
 {% extends 'jornal/base.html' %}
+{% load static %}
 {% block title %}
 <title>Login</title>
 {% endblock title %}
 {% block content %}
-<main>
-    <form action="{% url 'jornal:login' %}" method="POST" id="login_form">
-        {% csrf_token %}
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="name" required>
-        <br>
-        <label for="password">Senha: </label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <span style="display:none;" id="login_error"></span>
-        <input type="submit" value="Enviar">
-    </form>
+<main class="section">
+    <div class="container is-max-desktop">
+        <div class="box has-background-dark">
+            <h1 class="title is-3 has-text-centered mb-5 has-text-white">Entrar</h1>
+            <form action="{% url 'jornal:login' %}" method="POST" id="login_form">
+                {% csrf_token %}
+                <div class="field">
+                    <label class="label has-text-white" for="username">Username</label>
+                    <div class="control">
+                        <input class="input is-white" type="text" name="username" id="username" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label has-text-white" for="password">Senha</label>
+                    <div class="control">
+                        <input class="input is-white" type="password" name="password" id="password" required>
+                    </div>
+                </div>
+                <p class="help is-danger" style="display:none;" id="login_error">Username ou senha inválidos.</p>
+                <div class="field is-grouped is-grouped-centered mt-5">
+                    <div class="control">
+                        <input type="submit" value="Entrar" class="button is-link is-fullwidth">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 <script src="{% static 'jornal/js/login.js' %}"></script>
-{% endblock content %}  
+{% endblock content %}
