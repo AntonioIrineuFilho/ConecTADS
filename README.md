@@ -1,5 +1,6 @@
 # ConecTADS
-Sistema que simula um blog informativo desenvolvido com Django para a disciplina de Desenvolvimento Web do curso de TADS do IFRN-CNAT.
+
+Sistema que simula um blog informativo desenvolvido com Django para a disciplina de Desenvolvimento Web do curso de Análise e Desenvolvimento de Sistemas do IFRN-CNAT.
 
 ## Tecnologias
 
